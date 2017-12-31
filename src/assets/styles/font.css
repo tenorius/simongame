@@ -1,0 +1,7 @@
+﻿    /* @font-face kit by Fonts2u (http://www.fonts2u.com) */
+    @font-face {font-family:"AlfaSlabOne";
+        src:url("../fonts/AlfaSlabOne-Regular-OTF.eot?") format("eot"),
+        url("../fonts/AlfaSlabOne-Regular-OTF.woff") format("woff"),
+        url("../fonts/AlfaSlabOne-Regular-OTF.ttf") format("truetype"),
+        url("../fonts/AlfaSlabOne-Regular-OTF.svg#AlfaSlabOne-Regular") format("svg");
+        font-weight:normal;font-style:normal;}

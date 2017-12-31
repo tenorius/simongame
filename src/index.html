@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Simon Game</title>
+    <link href="assets/styles/font.css" rel="stylesheet"/>
     <style>
         html{
             height: 100%;
@@ -43,6 +44,10 @@
             border: 12px solid #333;
         }
 
+        .btn.lit{
+            background-color: purple!important;
+        }
+
         .btn.one{
             border-top-left-radius: 100%;
             background-color: #00a74a;
@@ -79,8 +84,14 @@
 
         .title{
             font-size: 3.2rem;
-            font-weight: 900;
+            /*font-weight: 600;*/
             margin-top: 30px;
+            font-family: 'AlfaSlabOne', arial;
+            color: #222;
+        }
+
+        .small{
+            font-size: 12px;
         }
 
         .control{
@@ -103,11 +114,18 @@
         }
 
         .display{
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 30px;
             width: 50px;
             border: 3px solid #333;
             border-radius: 10px;
             background-color: #430710;
+        }
+        .display .value{
+            font-size: 22px;
+            color: red;
         }
 
         .start{
@@ -172,6 +190,11 @@
             border-right: 3px solid #333;
             border-left: 3px solid #333;
             background-color: #3193DE;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .pointer.on{
+            transform: translateX(90%);
         }
 
     </style>
@@ -190,7 +213,9 @@
             <div class="control">
                 <div class="control-item">
                     <span class="spacer"></span>
-                    <div class="display"></div>
+                    <div class="display">
+                        <span class="value"></span>
+                    </div>
                     <span class="label">Count</span>
                 </div>
                 <div class="control-item">
@@ -216,5 +241,62 @@
 
         </div>
     </div>
+    <audio id="audio1" src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></audio>
+    <audio id="audio2" src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"></audio>
+    <audio id="audio3" src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></audio>
+    <audio id="audio4" src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></audio>
+    <script>
+
+        function button(el, audio) {
+            this.element = document.querySelector(el);
+            this.audio =  document.querySelector(audio);
+            this.element.addEventListener('click', this.play.bind(this));
+        }
+        button.prototype = {
+            constructor: button,
+            play: function () {
+                let that = this;
+                console.log(this);
+                this.element.classList.toggle('lit');
+                this.audio.currentTime = 0;
+                this.audio.play();
+
+                setTimeout(function () {
+                    that.element.classList.toggle('lit');
+                }, 300);
+            }
+        };
+
+        const btn1 = new button('.btn.one', '#audio1');
+        const btn2 = new button('.btn.two', '#audio2');
+        const btn3 = new button('.btn.three', '#audio3');
+        const btn4 = new button('.btn.four', '#audio4');
+
+        let power = false;
+        const powerEl = document.querySelector('.switch');
+        const pointerEl = document.querySelector('.pointer');
+        const valueEl = document.querySelector('.value');
+        function onPowerClick(e) {
+            power = !power;
+            pointerEl.classList.toggle('on');
+
+            if(power){
+                valueEl.innerHTML = "- -";
+            }else{
+                valueEl.innerHTML = ""
+            }
+        }
+        powerEl.addEventListener('click', onPowerClick);
+
+        const startEl = document.querySelector('.start');
+        function onStartClick(e) {
+            
+        }
+        startEl.addEventListener('click', onStartClick);
+
+
+
+
+    </script>
 </body>
 </html>
